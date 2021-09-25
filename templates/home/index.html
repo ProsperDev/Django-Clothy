@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+        <div id="home-banner">
+            <div class="slider-item slider-item--one">
+                <img src="{% static "images/home-banner-1.jpg" %}" alt="First slide">
+                <div class="slider-caption">
+                    <h2 class="slider-caption__heading">Dress Like a Queen</h2>
+                    <p class="slider-caption__tagline">Create your gorgeous look!</p>
+                    <a href="{% url 'products_list' %}" class="button">Start shopping</a>
+                </div>
+            </div>
+            <div class="slider-item slider-item--two">
+                <img src="{% static "images/home-banner-2.jpg" %}" alt="Second slide">
+                <div class="slider-caption">
+                    <h2 class="slider-caption__heading">Fresh New Styles</h2>
+                    <p class="slider-caption__tagline">New arrivals every week</p>
+                    <a href="{% url 'products_list' %}" class="button">Start shopping</a>
+                </div>
+            </div>
+        </div>
+        <div id="home-content" class="container-fluid">
+            <div class="row">
+                <div id="collections" class="col">
+                    <h1 class="heading">Explore our collections</h1>
+                    <div class="collection">
+                        <a href="{% url 'products_list' 'dresses' %}" class="collection__img-container img-container">
+                            <img class="img-container__img" src="{% static "images/dress-01-1.jpg" %}" alt="">
+                        </a>
+                        <h2 class="collection__heading">It’s time for a new dress</h2>
+                        <p class="collection__description">Refresh your look with our exclusive dresses.</p>
+                        <a href="{% url 'products_list' 'dresses' %}" class="button">Shop dresses</a>
+                    </div>
+                    <div class="collection">
+                        <a href="{% url 'products_list' 'coats' %}" class="collection__img-container img-container">
+                            <img class="img-container__img" src="{% static "images/coat-01-1.jpg" %}" alt="">
+                        </a>
+                        <h2 class="collection__heading">Get warm for winter!</h2>
+                        <p class="collection__description">Check out our new collection of coats & jackets for this winter.</p>
+                        <a href="{% url 'products_list' 'coats' %}" class="button">Shop coats</a>
+                    </div>
+                    <div class="collection">
+                        <a href="{% url 'products_list' 'shoes' %}" class="collection__img-container img-container">
+                            <img class="collection__img-shoes img-container__img" src="{% static "images/shoes-01-1.jpg" %}" alt="">
+                        </a>
+                        <h2 class="collection__heading">Shoes for any occasion</h2>
+                        <p class="collection__description">Complete your look with shoes for any occasion.</p>
+                        <a href="{% url 'products_list' 'shoes' %}" class="button">Shop shoes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="home-parallax">
+                    <div class="parallax-container">
+                        <img src="{% static "images/parallax.jpg" %}" data-speed="1" class="parallax-img" alt="">
+                        <div class="parallax-content">
+                            <h2 class="parallax-heading">Be gorgeous</h2>
+                            <p class="parallax-tagline">You deserve it</p>
+                            <a href="{% url 'products_list' %}" class="button">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h2 class="heading">Popular this week</h2>
+                <div id="home-popular" class="col-sm-10">
+                    {% for product in bestsellers %}
+                        <div class="slider-item">
+                            <a href="{% url 'product' product.product.id %}" class="slider-item__container">
+                                <img class="slider-item__img" src="{{ product.image.image.url }}" alt="">
+                                <p class="product-name">{{ product.product.name }}</p>
+                                <p class="product-price">{{ product.product.price }}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+{% endblock %}
